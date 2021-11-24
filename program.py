@@ -102,4 +102,17 @@ FROM shopping s JOIN prices p ON s.id=p.id;
 
 SELECT s.id, s.name, s.amount, s.maavar, p.price FROM shopping s JOIN
 prices p ON s.id=p.id WHERE p.price = (SELECT MAX(price) FROM prices)
+
+CREATE TABLE shopping (id INTEGER PRIMARY KEY, name TEXT, amount INTEGER);
+
+CREATE TABLE shopping_location (id INTEGER PRIMARY KEY, name TEXT, maavar INTEGER);
+drop table shopping_location;
+
+INSERT INTO shopping_location(id, name, maavar)
+select id, name, maavar * 2
+from shopping
+where amount > 1;
+
+select * from shopping_location;
+
 '''
